@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/index.css">
+    <title>Личный кабинет</title>
+</head>
+<body>
+    <%- include('blocks/header', status) -%>
+
+    <form action="/profile" method="post" class="profile-form">
+        <p>фамилия</p>
+        <input type="text" name="fam" id="" value="<%= user.fam %>">
+        <p>имя</p>
+        <input type="text" name="name" id="" value="<%= user.name %>">
+        <p>отчество</p>
+        <input type="text" name="otch" id="" value="<%= user.otc %>">
+        <p>почта</p>
+        <input type="text" name="email" id="" value="<%= user.email %>">
+        <p>тел.</p>
+        <input type="text" name="phone" id="" value="<%= user.phone %>">
+        <p>логин</p>
+        <input type="text" name="login" id="" value="<%= user.login %>">
+        <button type="submit">Обновить данные</button>
+    </form>
+
+    <button onclick="open_div()" class="change-password-btn">Сменить пароль</button>
+
+    <div class="password_swap" id="password_swap">
+        <h3>Сменить пароль</h3>
+        <form action="/password_swap" method="post" class="password-form">
+            <input type="password" name="old_password" placeholder="Старый пароль">
+            <input type="password" name="new_password" placeholder="Новый пароль">
+            <button type="submit">Обновить пароль</button>
+        </form>
+    </div>
+
+    <div class="orders-section">
+        <h1>Заказы</h1>
+
+        <% for(let i = 0; i < orders.length; i++){ %>
+            <div class="order-group">
+                <h2 class="order-date">Дата: <%= orders[i].Order_date %></h2>
+                <h3>Статус довтавки: <span style="color: lawngreen;"><%= orders[i].order_status %></span></h3>
+                <h3>Статус оплаты: <span style="color: lawngreen;"><%= orders[i].pay_status %></span></h3>
+
+                <% for(let j = 0; j < orders[i].order_items.length; j++){ %>
+                    <div class="product-item">
+                        <img src="<%= orders[i].order_items[j].product.img %>" alt="">
+                        <div class="product-info">
+                            <h2 class="product-name">
+                                <%= orders[i].order_items[j].product.name %>
+                            </h2>
+                            <p class="product-comment">
+                                <%= orders[i].order_items[j].product.Coment %>
+                            </p>
+                            <p class="product-price">
+                                Цена на момент заказа: <%= orders[i].order_items[j].Price * orders[i].order_items[j].Quantity %>
+                            </p>
+                            <p class="product-quantity">
+                                Кол-во: <%= orders[i].order_items[j].Quantity %>
+                            </p>
+                        </div>
+                    </div>
+                <% } %>
+            </div>
+        <% } %>
+    </div>
+
+    <%- include('blocks/footer', status) -%>
+
+    <script>
+        function open_div(){
+            document.getElementById("password_swap").style.visibility = "visible";
+        }
+    </script>
+</body>
+</html>

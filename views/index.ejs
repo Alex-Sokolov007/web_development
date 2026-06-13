@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/styles/index.css">
+    <title>Freyme work 'express'</title>
+
+</head>
+<body>
+
+<%- include('blocks/header', status) -%>
+    
+<main class="products-grid">
+    <% products.forEach(product => { %>
+        <article class="product-card">
+            <div class="product-image-wrapper">
+                <img 
+                    src="<%= product.img %>" 
+                    alt="Изображение товара: <%= product.name %>" 
+                    loading="lazy"
+                >
+            </div>
+            
+            <div class="product-info">
+                <h3 class="product-title"><%= product.name %></h3>
+                <p class="product-price"><%= product.prise %> ₽</p>
+                
+                <!-- <div class="product-actions"> -->
+                    <a href="/item/<%= product.id_product %>" class="btn btn-outline">Подробнее</a>
+                    <form id="add_item" action="/add_item" method="post">
+                        <input type="text" name="id_user" hidden value="<%= user.id_user %>">
+                        <input type="text" name="id_product" hidden value="<%= product.id_product %>">
+                        <button class="btn btn-solid">Добавить в корзину</button>
+                    </form>
+                <!-- </div> -->
+            </div>
+        </article>
+    <% }); %>
+</main>
+
+
+</body>
+
+
+</html>

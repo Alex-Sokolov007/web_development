@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device‑width, initial‑scale=1.0" />
+  <title>Магазин — Товар</title>
+  <link rel="stylesheet" href="/styles/item.css">
+  <link rel="stylesheet" href="/styles/index.css">
+
+</head>
+<body>
+
+    <%- include('blocks/header', status) -%>
+
+  <main class="main">
+                  <% if(product[0].id_product != undefined){ %>
+                    <section class="product-detail">
+                      <div class="container">
+                        <div class="product-card big">
+                          <img src="<%= product[0].img %>" alt="Товар" />
+                          <div class="product-info">
+                            <h2><%= product[0].name %></h2>
+                            
+                            <p class="price"><%= product[0].prise %> ₽</p>
+                            
+                            <div class="actions">
+                    <form id="add_item" action="/item/<%= product[0].id_product %>" method="post">
+                        <input type="text" name="id_user" hidden value="<%= user.id_user %>">
+                        <input type="text" name="id_product" hidden value="<%= product[0].id_product %>">
+                        <button class="btn btn-solid">Добавить в корзину</button>
+                    </form>
+                              <button class="btn fav-btn">В избранное</button>
+                            </div>
+                          </div>
+                        </div>
+                        <div><%= product[0].Coment %></div>
+                      </div>
+                      
+                    </section>
+                    <% } else { %>
+                      <p>Ошибка, товар не найден</p>
+                      <% } %>
+  </main>
+
+    <%- include('blocks/footer') -%>
+
+</body>
+</html>

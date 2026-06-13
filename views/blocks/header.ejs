@@ -1,0 +1,16 @@
+<header>
+        <a href="/"><div><h2>Магазин авто запчастей </h2></div></a>
+        <div>
+            <ul>
+                <% if(!status){%>
+                <li><a href="/login"><button>Войти</button></a></li>
+                <% }else{ if(user.id_role == 2){ %>  
+                    <li><a href="/admin"><button>Панель администратора</button></a></li>
+                    <%}%>
+                <li><a href="/logout"><button>Выйти</button></a></li>
+                <li><a href="/busket"><button>Козина</button></a></li>
+                <li><a href="/profile"><button>Личный кабинет</button></a></li>
+                <% } %>
+            </ul>
+        </div>
+    </header>

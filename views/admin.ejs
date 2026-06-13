@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>страница администратора</title>
+    <link rel="stylesheet" href="/styles/index.css">
+    <link rel="stylesheet" href="/styles/admin.css">
+</head>
+<body>
+
+<%- include('blocks/header', status) -%>
+<h1>Пользователи</h1>
+    <div>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Фамилия</th>
+                <th>Имя</th>
+                <th>Отчество</th>
+                <th>email</th>
+                <th>Телефон</th>
+                <th>Логин</th>
+                <th>Пароль</th>
+                <th>Удалить</th>
+                <th>Обновить</th>
+            </tr>
+            <%for(let i = 0; i<users.length; i++)  {%>
+                <tr>
+                    <form action="/redact_user" method="post">
+                        <th><input type="number" name="id_user" readonly value="<%= users[i].id_user %>"></th>
+                        <th><input type="text" name="fam" value="<%= users[i].fam %>"></th>
+                        <th><input type="text" name="name" value="<%= users[i].name %>"></th>
+                        <th><input type="text" name="otc" value="<%= users[i].otc %>"></th>
+                        <th><input type="email" name="email" value="<%= users[i].email %>"></th>
+                        <th><input type="tel" name="phone" value="<%= users[i].phone %>"></th>
+                        <th><input type="text" name="login" value="<%= users[i].login %>"></th>
+                        <th><select name="id_role">
+                            <% for(let j = 0; j<roles.length; j++){ %>
+                            <option <% if(roles[j].id_role == users[i].id_role){%> selected <% }%> value="<%= roles[j].id_role %>"><%= roles[j].role %></option>
+                            <% } %>
+                        </select></th>
+                        <th>
+                            <button formaction="/delete_user" >Удалить</button>
+                        </th>
+                        <th>
+                            <button formaction="/update_user">Обновить</button>
+                        </th>
+                    </form>
+                </tr>
+            <% } %>
+        </table>
+    </div>
+    
+<div class="orders-section">
+  <h1>Заказы</h1>
+
+  <% if (orders && orders.length > 0) { %>
+    <% for(let i = 0; i < orders.length; i++){ %>
+      <div class="order-group">
+        <h2 class="order-date">Заказ №<%= orders[i].Id %> от <%= orders[i].Order_date %></h2>
+        
+        <!-- Форма для изменения статусов заказа -->
+        <form action="/update_order_status" method="post" class="status-form">
+          <input type="hidden" name="id_order" value="<%= orders[i].Id %>">
+
+          <h3>Статус доставки: 
+            <select name="order_status" onchange="this.form.submit()">
+              <% for(let k = 0; k < all_order_statuses.length; k++) { %>
+                <option value="<%= all_order_statuses[k].id %>" 
+                  <% if(all_order_statuses[k].id == orders[i].id_order_status) { %> selected <% } %>>
+                  <%= all_order_statuses[k].order_status %>
+                </option>
+              <% } %>
+            </select>
+          </h3>
+          
+          <h3>Статус оплаты: 
+            <select name="pay_status" onchange="this.form.submit()">
+              <% for(let m = 0; m < all_pay_statuses.length; m++) { %>
+                <option value="<%= all_pay_statuses[m].Id %>" 
+                  <% if(all_pay_statuses[m].id == orders[i].id_pay_status) { %> selected <% } %>>
+                  <%= all_pay_statuses[m].pay_status %>
+                </option>
+              <% } %>
+            </select>
+          </h3>
+        </form>
+
+        <% 
+          const orderItems = orders[i].order_items;
+          if (orderItems && Array.isArray(orderItems) && orderItems.length > 0) { %>
+            
+            <% for(let j = 0; j < orderItems.length; j++){ %>
+              <% 
+                const item = orderItems[j];
+                const product = item.product;
+                
+                if (!product) continue;
+              %>
+              
+              <div class="product-item">
+                <img src="<%= product.img %>" alt="">
+                <div class="product-info">
+                  <h2 class="product-name">
+                    <%= product.name %>
+                  </h2>
+                  <p class="product-comment">
+                    <%= product.Coment %>
+                  </p>
+                  <p class="product-price">
+                    Цена на момент заказа: <%= item.Price * item.Quantity %> ₽
+                  </p>
+                  <p class="product-quantity">
+                    Кол-во: <%= item.Quantity %> шт.
+                  </p>
+                </div>
+              </div>
+            <% } %>
+            
+        <% } else { %>
+          <p class="no-items">В заказе нет товаров</p>
+        <% } %>
+      </div>
+    <% } %>
+  <% } else { %>
+    <p class="no-orders">У вас пока нет заказов</p>
+  <% } %>
+</div>
+
+
+
+</body>
+</html>
