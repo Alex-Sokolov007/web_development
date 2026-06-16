@@ -25,7 +25,6 @@
                             
                             <div class="actions">
                     <form id="add_item" action="/item/<%= product[0].id_product %>" method="post">
-                        <input type="text" name="id_user" hidden value="<%= user.id_user %>">
                         <input type="text" name="id_product" hidden value="<%= product[0].id_product %>">
                         <button class="btn btn-solid">Добавить в корзину</button>
                     </form>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Добавить товар</title>
+    <link rel="stylesheet" href="/styles/login.css">
+</head>
+<body>
+    <Form action="/create_product" method="POST">
+        <h2>Добавить товар</h2>
+        <input type="text" name="name" id="" placeholder="Введите название товара" required>
+        <input type="number" name="price" id="" placeholder="Введите цену за шт. в руб" required>
+        <input type="file" name="img" id=""><img id="img" src="" alt="">
+        <textarea name="Coment" id="" cols="30" rows="10"></textarea>
+        <select name="id_company" id="">
+            <% for(let i = 0; i<Company_creater.length; i++){ %>
+                <option value="<%= Company_creater[i].id_company %>"><%= Company_creater[i].company_name %></option>
+                <% } %>
+        </select>
+        <button type="submit">Добавить товар</button>
+    </Form>
+
+    <script>
+        document.querySelector('input[type="file"][name="img"]').addEventListener('change', function(event) {
+          const file = event.target.files[0]; // Получаем выбранный файл
+          const imgTag = document.getElementById('img');
+      
+          if (file && file.type.startsWith('image/')) {
+            const reader = new FileReader();
+      
+            reader.onload = function(e) {
+              imgTag.src = e.target.result; // Устанавливаем src картинки
+            };
+      
+            reader.readAsDataURL(file); // Читаем файл как Data URL
+          } else {
+            // Если файл не выбран или не изображение, очищаем изображение
+            imgTag.src = '';
+          }
+        });
+      </script>
+</body>
+</html>

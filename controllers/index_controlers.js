@@ -17,20 +17,15 @@ class Index_controler{
     try {
         const decoded = jwt.verify(req.cookies.token, JWT.JWT_SECRET);
         decoded.products = products
-        // console.log(decoded)
-        // Пользователь авторизован - показываем главную страницу
-        // return res.render("index", { user: decoded });
         return res.render("index", decoded);
 
     } catch (err) {
         // Токиен невалиден - показываем страницу входа
-        // return res.render("login");
         console.log(err)
     }
     }
 
     async add_item(req, res){
-        // console.log(req.body)
         let in_busket = false
         const user_busket = await d_b.get_data("User_busket", "id_user", req.body.id_user)
         if(req.body.id_user && req.body.id_product)

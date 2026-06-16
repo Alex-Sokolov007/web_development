@@ -253,6 +253,8 @@ add_order(id_user_busket, adress, order_status, pay_status) {
 
 const d_b = new DB
 
+// await d_b.delete_qwery("product","id_product", 5)
+
 // console.log(await d_b.get_data())
 // console.log(await d_b.get_data("product"))
 

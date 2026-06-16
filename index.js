@@ -8,7 +8,9 @@ import login_router from "./routers/login_router.js"
 import reg_router from "./routers/reg_router.js"
 import user_profile_router from "./routers/user_profile_router.js"
 import admin_router from "./routers/admin_router.js"
+import create_product_router from './routers/create_product_router.js'
 
+app.use('/', create_product_router)
 app.use('/', item_router)
 app.use('/', admin_router)
 app.use('/', Index_router)
