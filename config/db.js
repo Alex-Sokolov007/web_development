@@ -249,6 +249,21 @@ add_order(id_user_busket, adress, order_status, pay_status) {
   });
 }
 
+add_product_rating(id_product, stars, coment, id_user) {
+  const sql = `
+    INSERT INTO Product_Rating (id_product, stars, coment, id_user)
+    VALUES (?, ?, ?, ?)
+  `;
+
+  db.run(sql, [id_product, stars, coment, id_user], function (err) {
+    if (err) {
+      console.error("Ошибка при добавлении отзыва о товаре:", err.message);
+    } else {
+      console.log(`Отзыв о товаре добавлен, ID: ${this.lastID}`);
+    }
+  });
+}
+
 }
 
 const d_b = new DB
@@ -259,4 +274,5 @@ const d_b = new DB
 // console.log(await d_b.get_data("product"))
 
 // await d_b.addUser("Адин","Админов","Админович","admin@mail.ru","89612389909",'2','2',2)
+// console.log(await HASH_FUNCTION.hashPassword("Super_Admin123"))
 export default d_b

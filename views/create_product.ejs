@@ -12,7 +12,7 @@
         <h2>Добавить товар</h2>
         <input type="text" name="name" id="" placeholder="Введите название товара" required>
         <input type="number" name="price" id="" placeholder="Введите цену за шт. в руб" required>
-        <input type="file" name="img" id=""><img id="img" src="" alt="">
+        <input type="url" name="img" id="" placeholder="Вставьте ссылку на излбражение" ><img id="img" src="" alt="">
         <textarea name="Coment" id="" cols="30" rows="10"></textarea>
         <select name="id_company" id="">
             <% for(let i = 0; i<Company_creater.length; i++){ %>
@@ -23,7 +23,7 @@
     </Form>
 
     <script>
-        document.querySelector('input[type="file"][name="img"]').addEventListener('change', function(event) {
+        document.querySelector('input[type="file"][name="img"]').addEventListener('key_pres', function(event) {
           const file = event.target.files[0]; // Получаем выбранный файл
           const imgTag = document.getElementById('img');
       

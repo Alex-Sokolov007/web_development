@@ -6,7 +6,17 @@ import jwt from 'jsonwebtoken';
 class Item_controler{
     async item_info(req, res){
         const product = await d_b.get_data("Product", "Id_product", req.params.id)
-        // console.log(product)
+        const Product_Rating = await d_b.get_data("Product_Rating", "id_product", product[0].id_product)
+        for(let i = 0; i<Product_Rating.length; i++){
+            const user = await d_b.get_data("Users","id_user", Product_Rating[i].id_user)
+            Product_Rating[i].user = user[0]
+        }
+        const Company_creater = await d_b.get_data("Company_creater","id_company", product[0].id_company)
+        const country = await d_b.get_data("Coutry_creater", "id_coutry", Company_creater[0].id_country)
+        Company_creater[0].country = country[0]
+        product.Company_creater = Company_creater[0]
+        product.Product_Rating = Product_Rating
+        console.log(product)
         if (!req.cookies.token) {
 
         return res.render("item", {status: false, product});
@@ -16,9 +26,7 @@ class Item_controler{
     try {
         const decoded = jwt.verify(req.cookies.token, JWT.JWT_SECRET);
         decoded.product = product
-        // console.log(decoded)
-        // Пользователь авторизован - показываем главную страницу
-        // return res.render("index", { user: decoded });
+        // console.log(decoded.product.Product_Rating)
         return res.render("item", decoded);
 
     } catch (err) {

@@ -10,15 +10,39 @@
 <body>
     <Form action="/registration" method="POST">
         <h2>Регистрация</h2>
+        <%if(status != undefined){%>
+        <h2 style="color: brown;">Ошибка при регистрации</h2>
+        <%}%>
         <input type="text" name="user_name" id="" placeholder="Введите имя" required>
         <input type="text" name="user_sure_name" id="" placeholder="Введите фамилию" required>
         <input type="text" name="user_otch" id="" placeholder="Введите отчество" required>
-        <input type="text" name="login" id="" placeholder="Введите логин" required>
-        <input type="password" name="password" id="" placeholder="Введите пароль" required>
+        <input type="text" name="login" id="" placeholder="Введите логин" minlength="8"
+    pattern="(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}"
+    title="Логин должен содержать минимум 8 символов, включая буквы и цифры.">
+        required>
+        <input type="password" name="password" id="password" placeholder="Введите пароль" required minlength="8"
+    pattern="(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}"
+    title="Пароль должен содержать минимум 8 символов, включая буквы и цифры.">
+        <input type="password" name="password_confirm" id="passwordConfirm" placeholder="Повторите пароль" required>
         <input type="email" name="email" id="" placeholder="Введите адрес электронной почты" required>
         <input type="tel" name="phone" id="" placeholder="Введите номер телефона" required>
-        <button type="submit">Регистрация</button>
+        <button onclick="" type="submit">Регистрация</button>
         <p>Уже есть аккаунт?<a href="login"> Войти</a></p>
     </Form>
+
+<script>
+    // function password_confirm(){
+    document.getElementById('registrationForm').addEventListener('submit', function (e) {
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('passwordConfirm').value;
+
+    if (password !== confirmPassword) {
+        e.preventDefault(); // Останавливаем отправку формы
+        alert('Пароли не совпадают! Пожалуйста, проверьте ввод.');
+        // Лучше вместо alert сделать красивое сообщение рядом с полем — это базовый вариант
+    }
+    });
+    // }
+</script>
 </body>
 </html>

@@ -32,9 +32,31 @@
                             </div>
                           </div>
                         </div>
-                        <div><%= product[0].Coment %></div>
-                      </div>
+                        <div class="about_info">
+                          <p>Компания: <%= product.Company_creater.company_name %></p>
+                            <p>Страна производитель: <%= product.Company_creater.country.country %></p>
+                            <img class="country_img" src="<%= product.Company_creater.country.img %>" alt="">
+                          <div>
+                              <p> <%= product[0].Coment %></p>
+                          </div>
+                        </div>
+                        </div>
                       
+<% for(let i = 0; i < product.Product_Rating.length; i++) { %>
+    <div class="coment">
+      <div>
+        <p>👤 Пользователь: <%= product.Product_Rating[i].user.name %></p>   
+<div>
+        <div class="stars">
+          <p><%for(let j = 0; j<product.Product_Rating[i].stars; j++){ %>⭐<% } %> </p>
+        </div>
+        <p>💬 Комментарий: <%= product.Product_Rating[i].coment %></p>
+</div>
+      </div>
+      
+      </div>
+<% } %>
+
                     </section>
                     <% } else { %>
                       <p>Ошибка, товар не найден</p>

@@ -242,3 +242,13 @@
     font-size: 14px;
   }
 }
+
+.stars{
+  background-color: rgba(234, 255, 46, 0.3);
+  border-radius: 30%;
+  width: 13%;
+}
+
+.country_img{
+  width: 20%;
+}
