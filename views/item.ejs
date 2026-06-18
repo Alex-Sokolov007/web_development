@@ -41,7 +41,14 @@
                           </div>
                         </div>
                         </div>
-                      
+                  <h1>Отзывы</h1>
+      <form action="/add_product_rating" method="post">
+      <p>Звёзды ⭐</p>
+      <input type="number" name="stars" min="1" max="5" id="">
+      <p>коментарий</p>
+      <textarea name="coment" id="" cols="30" rows="10"></textarea>
+      <input type="number" hidden value="">
+      </form>
 <% for(let i = 0; i < product.Product_Rating.length; i++) { %>
     <div class="coment">
       <div>

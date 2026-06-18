@@ -272,7 +272,7 @@ const d_b = new DB
 
 // console.log(await d_b.get_data())
 // console.log(await d_b.get_data("product"))
-
+// await d_b.update_for_id("product", "Coment", "охлаждающая жидкость на основе этиленгликоля, созданная по карбоксилатной (органической) технологии. Она эффективно защищает от коррозии, идеально подходит для высоконагруженных двигателей с алюминиевыми радиаторами и служит до 5 лет", "id_product", 2)
 // await d_b.addUser("Адин","Админов","Админович","admin@mail.ru","89612389909",'2','2',2)
 // console.log(await HASH_FUNCTION.hashPassword("Super_Admin123"))
 export default d_b
