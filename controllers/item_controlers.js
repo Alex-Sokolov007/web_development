@@ -16,7 +16,7 @@ class Item_controler{
         Company_creater[0].country = country[0]
         product.Company_creater = Company_creater[0]
         product.Product_Rating = Product_Rating
-        console.log(product)
+        // console.log(product)
         if (!req.cookies.token) {
 
         return res.render("item", {status: false, product});
@@ -48,6 +48,11 @@ class Item_controler{
         await d_b.add_User_To_Basket(req.body.id_user,req.body.id_product,1)
         }
         res.redirect(`/item/${req.params.id}`)
+    }
+    async add_product_rating(req, res){
+        const decoded = jwt.verify(req.cookies.token, JWT.JWT_SECRET);
+        await d_b.add_product_rating(req.body.id_product, req.body.stars, req.body.coment, decoded.user.id_user)
+        res.redirect(`/item/${req.body.id_product}`)
     }
 }
 

@@ -42,13 +42,18 @@
                         </div>
                         </div>
                   <h1>Отзывы</h1>
+
+        <% if(status) {%>
       <form action="/add_product_rating" method="post">
       <p>Звёзды ⭐</p>
-      <input type="number" name="stars" min="1" max="5" id="">
+      <input type="number" value="1" required name="stars" min="1" max="5" id="">
       <p>коментарий</p>
-      <textarea name="coment" id="" cols="30" rows="10"></textarea>
-      <input type="number" hidden value="">
+      <textarea name="coment" required id="" cols="30" rows="10"></textarea>
+      <input type="number" name="id_product" hidden value="<%= product[0].id_product %>">
+      <button>Добавить отзыв</button>
       </form>
+      <% }if(product.Product_Rating.length > 0){ %>
+
 <% for(let i = 0; i < product.Product_Rating.length; i++) { %>
     <div class="coment">
       <div>
@@ -62,8 +67,9 @@
       </div>
       
       </div>
+<% }}else{ %>
+<h2>Отзывов нет</h2>
 <% } %>
-
                     </section>
                     <% } else { %>
                       <p>Ошибка, товар не найден</p>
