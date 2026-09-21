@@ -1,7 +1,8 @@
 import  sqlite3  from  'sqlite3'
 import HASH_FUNCTION from './hash.js';
+import "dotenv/config"
 
-const db = new sqlite3.Database("config/shop_autho_detalic.db")
+const db = new sqlite3.Database(process.env.db_link)
 
 class DB{
 
@@ -268,11 +269,4 @@ add_product_rating(id_product, stars, coment, id_user) {
 
 const d_b = new DB
 
-// await d_b.delete_qwery("product","id_product", 5)
-
-// console.log(await d_b.get_data())
-// console.log(await d_b.get_data("product"))
-// await d_b.update_for_id("product", "Coment", "охлаждающая жидкость на основе этиленгликоля, созданная по карбоксилатной (органической) технологии. Она эффективно защищает от коррозии, идеально подходит для высоконагруженных двигателей с алюминиевыми радиаторами и служит до 5 лет", "id_product", 2)
-// await d_b.addUser("Адин","Админов","Админович","admin@mail.ru","89612389909",'2','2',2)
-// console.log(await HASH_FUNCTION.hashPassword("Super_Admin123"))
 export default d_b

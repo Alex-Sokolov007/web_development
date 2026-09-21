@@ -3,10 +3,11 @@ import express from "express"
 import { app, PORT} from "../config/config.js"
 import d_b from "../config/db.js"
 import cookieParser from 'cookie-parser';
+import "dotenv/config"
 
 
 const JWT = {
-    JWT_SECRET: 'super_secret_key_ultimate_v2', // Храните в .env
+    JWT_SECRET: process.env.JWT_SECRET, // Храните в .env
     JWT_EXPIRES_IN: '1h', // Время жизни токена
     async authenticateToken(req, res, next) {
       const token = req.cookies?.token;
@@ -20,7 +21,7 @@ const JWT = {
       return res.status(403).json({ error: 'Неверный или истекший токен' });
     }
     
-    req.user = user; // Добавляем информацию о пользователе в запрос
+    req.user = user; 
     next();
   });
 },
@@ -43,3 +44,4 @@ async logouting_user(req, res) {
 }
 
 export default JWT
+    // JWT_SECRET: "Super secret key",

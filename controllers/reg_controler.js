@@ -8,6 +8,7 @@ class Reg_controler{
     }
     async new_user(req, res){
         if(req.body.password == req.body.password_confirm){
+            console.log(req.body)
             d_b.addUser(req.body.user_name, req.body.user_sure_name, req.body.user_otch,req.body.email,req.body.phone,req.body.login,req.body.password,1)
             res.redirect("/login")
         }else(

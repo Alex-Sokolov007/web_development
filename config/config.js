@@ -3,7 +3,9 @@ import bodyParser from "body-parser"
 import methodOverride from "method-override";
 import JWT from "./JWT.js";
 import cookieParser from 'cookie-parser';
-const PORT = 5000
+import "dotenv/config"
+
+const PORT = process.env.PORT
 const app = express()
 
 app.use(express.json())
